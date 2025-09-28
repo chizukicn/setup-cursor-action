@@ -1,64 +1,31 @@
-name: CI
+name: ci
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest] # Cursor Agent CLI不支持Windows
-        node-version: [20]
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: pnpm
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.17.1
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Run tests
-        run: pnpm test
-
-      - name: Build
-        run: pnpm build
-
-  setup-cursor-agent-test:
+  ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Cursor Agent CLI (latest)
-        uses: ./
-        id: setup-cursor-agent-latest
-
-      - name: Verify Cursor Agent CLI installation
+      - uses: actions/checkout@v5
+      - name: Use Latest Corepack
         run: |
-          echo "Cursor Agent CLI path: ${{ steps.setup-cursor-agent-latest.outputs.cursor-agent-path }}"
-          echo "Version: ${{ steps.setup-cursor-agent-latest.outputs.cursor-agent-version }}"
-          cursor-agent --version
-
-      - name: Setup Cursor Agent CLI (specific version)
-        uses: ./
+          echo "Before: corepack version => $(corepack --version || echo 'not installed')"
+          npm install -g corepack@latest
+          echo "After : corepack version => $(corepack --version)"
+          corepack enable
+          pnpm --version
+      - uses: actions/setup-node@v5
         with:
-          version: latest
-        id: setup-cursor-agent-specific
-
-      - name: Verify specific version
-        run: |
-          echo "Specific version path: ${{ steps.setup-cursor-agent-specific.outputs.cursor-agent-path }}"
-          cursor-agent --version
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm lint
+      - run: pnpm build
+      - run: pnpm vitest --coverage
+      - uses: codecov/codecov-action@v5
