@@ -1,4 +1,5 @@
 import { arch, platform } from "node:os";
+import path from "node:path";
 import process from "node:process";
 import * as core from "@actions/core";
 import * as exec from "@actions/exec";
@@ -70,6 +71,8 @@ export class CursorAgentSetup {
 
       core.info("Running Cursor Agent CLI installation script...");
       await exec.exec("bash", ["-c", installScript]);
+
+      core.addPath(path.join(process.env.HOME ?? "", ".local/bin"));
 
       // Find the installed cursor-agent binary
       const agentPath = await io.which("cursor-agent");
