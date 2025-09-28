@@ -1,6 +1,5 @@
 {
   "name": "setup-cursor-action",
-  "type": "module",
   "version": "0.0.1.beta.0",
   "packageManager": "pnpm@10.17.1",
   "description": "GitHub Action for setting up Cursor Agent CLI",
@@ -8,16 +7,7 @@
   "license": "MIT",
   "repository": "chizukicn/setup-cursor-action",
   "sideEffects": false,
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./package.json": "./package.json"
-  },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.cts",
   "files": [
     "dist"
   ],
