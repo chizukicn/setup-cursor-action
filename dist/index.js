@@ -26,6 +26,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 //#endregion
 let node_os = require("node:os");
 node_os = __toESM(node_os);
+let node_path = require("node:path");
+node_path = __toESM(node_path);
 let node_process = require("node:process");
 node_process = __toESM(node_process);
 let node_child_process = require("node:child_process");
@@ -910,10 +912,10 @@ var require_util$6 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici@5.2
 			if (url.origin != null && typeof url.origin !== "string") throw new InvalidArgumentError$21("Invalid URL origin: the origin must be a string or null/undefined.");
 			const port = url.port != null ? url.port : url.protocol === "https:" ? 443 : 80;
 			let origin = url.origin != null ? url.origin : `${url.protocol}//${url.hostname}:${port}`;
-			let path$6 = url.path != null ? url.path : `${url.pathname || ""}${url.search || ""}`;
+			let path$7 = url.path != null ? url.path : `${url.pathname || ""}${url.search || ""}`;
 			if (origin.endsWith("/")) origin = origin.substring(0, origin.length - 1);
-			if (path$6 && !path$6.startsWith("/")) path$6 = `/${path$6}`;
-			url = new URL(origin + path$6);
+			if (path$7 && !path$7.startsWith("/")) path$7 = `/${path$7}`;
+			url = new URL(origin + path$7);
 		}
 		return url;
 	}
@@ -2283,15 +2285,15 @@ var require_parseParams = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@fast
 //#endregion
 //#region node_modules/.pnpm/@fastify+busboy@2.1.1/node_modules/@fastify/busboy/lib/utils/basename.js
 var require_basename = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@fastify+busboy@2.1.1/node_modules/@fastify/busboy/lib/utils/basename.js": ((exports, module) => {
-	module.exports = function basename$1(path$6) {
-		if (typeof path$6 !== "string") return "";
-		for (var i$1 = path$6.length - 1; i$1 >= 0; --i$1) switch (path$6.charCodeAt(i$1)) {
+	module.exports = function basename$1(path$7) {
+		if (typeof path$7 !== "string") return "";
+		for (var i$1 = path$7.length - 1; i$1 >= 0; --i$1) switch (path$7.charCodeAt(i$1)) {
 			case 47:
 			case 92:
-				path$6 = path$6.slice(i$1 + 1);
-				return path$6 === ".." || path$6 === "." ? "" : path$6;
+				path$7 = path$7.slice(i$1 + 1);
+				return path$7 === ".." || path$7 === "." ? "" : path$7;
 		}
-		return path$6 === ".." || path$6 === "." ? "" : path$6;
+		return path$7 === ".." || path$7 === "." ? "" : path$7;
 	};
 }) });
 
@@ -4951,10 +4953,10 @@ var require_request$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici@
 		channels$3.error = { hasSubscribers: false };
 	}
 	var Request$4 = class Request$4 {
-		constructor(origin, { path: path$6, method, body, headers, query, idempotent, blocking, upgrade: upgrade$1, headersTimeout, bodyTimeout, reset, throwOnError, expectContinue }, handler) {
-			if (typeof path$6 !== "string") throw new InvalidArgumentError$20("path must be a string");
-			else if (path$6[0] !== "/" && !(path$6.startsWith("http://") || path$6.startsWith("https://")) && method !== "CONNECT") throw new InvalidArgumentError$20("path must be an absolute URL or start with a slash");
-			else if (invalidPathRegex.exec(path$6) !== null) throw new InvalidArgumentError$20("invalid request path");
+		constructor(origin, { path: path$7, method, body, headers, query, idempotent, blocking, upgrade: upgrade$1, headersTimeout, bodyTimeout, reset, throwOnError, expectContinue }, handler) {
+			if (typeof path$7 !== "string") throw new InvalidArgumentError$20("path must be a string");
+			else if (path$7[0] !== "/" && !(path$7.startsWith("http://") || path$7.startsWith("https://")) && method !== "CONNECT") throw new InvalidArgumentError$20("path must be an absolute URL or start with a slash");
+			else if (invalidPathRegex.exec(path$7) !== null) throw new InvalidArgumentError$20("invalid request path");
 			if (typeof method !== "string") throw new InvalidArgumentError$20("method must be a string");
 			else if (tokenRegExp.exec(method) === null) throw new InvalidArgumentError$20("invalid request method");
 			if (upgrade$1 && typeof upgrade$1 !== "string") throw new InvalidArgumentError$20("upgrade must be a string");
@@ -4991,7 +4993,7 @@ var require_request$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici@
 			this.completed = false;
 			this.aborted = false;
 			this.upgrade = upgrade$1 || null;
-			this.path = query ? util$16.buildURL(path$6, query) : path$6;
+			this.path = query ? util$16.buildURL(path$7, query) : path$7;
 			this.origin = origin;
 			this.idempotent = idempotent == null ? method === "HEAD" || method === "GET" : idempotent;
 			this.blocking = blocking == null ? false : blocking;
@@ -5882,9 +5884,9 @@ var require_RedirectHandler = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/u
 			if (this.opts.origin) this.history.push(new URL(this.opts.path, this.opts.origin));
 			if (!this.location) return this.handler.onHeaders(statusCode, headers, resume$1, statusText);
 			const { origin, pathname, search } = util$14.parseURL(new URL(this.location, this.opts.origin && new URL(this.opts.path, this.opts.origin)));
-			const path$6 = search ? `${pathname}${search}` : pathname;
+			const path$7 = search ? `${pathname}${search}` : pathname;
 			this.opts.headers = cleanRequestHeaders(this.opts.headers, statusCode === 303, this.opts.origin !== origin);
-			this.opts.path = path$6;
+			this.opts.path = path$7;
 			this.opts.origin = origin;
 			this.opts.maxRedirections = 0;
 			this.opts.query = null;
@@ -6824,7 +6826,7 @@ var require_client = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici@5.2
 			writeH2(client, client[kHTTP2Session], request$1);
 			return;
 		}
-		const { body, method, path: path$6, host, upgrade: upgrade$1, headers, blocking, reset } = request$1;
+		const { body, method, path: path$7, host, upgrade: upgrade$1, headers, blocking, reset } = request$1;
 		const expectsPayload = method === "PUT" || method === "POST" || method === "PATCH";
 		if (body && typeof body.read === "function") body.read(0);
 		const bodyLength$1 = util$13.bodyLength(body);
@@ -6854,7 +6856,7 @@ var require_client = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici@5.2
 		if (reset != null) socket[kReset] = reset;
 		if (client[kMaxRequests] && socket[kCounter]++ >= client[kMaxRequests]) socket[kReset] = true;
 		if (blocking) socket[kBlocking] = true;
-		let header = `${method} ${path$6} HTTP/1.1\r\n`;
+		let header = `${method} ${path$7} HTTP/1.1\r\n`;
 		if (typeof host === "string") header += `host: ${host}\r\n`;
 		else header += client[kHostHeader];
 		if (upgrade$1) header += `connection: upgrade\r\nupgrade: ${upgrade$1}\r\n`;
@@ -6923,7 +6925,7 @@ var require_client = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici@5.2
 		return true;
 	}
 	function writeH2(client, session, request$1) {
-		const { body, method, path: path$6, host, upgrade: upgrade$1, expectContinue, signal, headers: reqHeaders } = request$1;
+		const { body, method, path: path$7, host, upgrade: upgrade$1, expectContinue, signal, headers: reqHeaders } = request$1;
 		let headers;
 		if (typeof reqHeaders === "string") headers = Request$3[kHTTP2CopyHeaders](reqHeaders.trim());
 		else headers = reqHeaders;
@@ -6964,7 +6966,7 @@ var require_client = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici@5.2
 			});
 			return true;
 		}
-		headers[HTTP2_HEADER_PATH] = path$6;
+		headers[HTTP2_HEADER_PATH] = path$7;
 		headers[HTTP2_HEADER_SCHEME] = "https";
 		const expectsPayload = method === "PUT" || method === "POST" || method === "PATCH";
 		if (body && typeof body.read === "function") body.read(0);
@@ -8771,16 +8773,16 @@ var require_mock_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici
 		}
 		return true;
 	}
-	function safeUrl(path$6) {
-		if (typeof path$6 !== "string") return path$6;
-		const pathSegments = path$6.split("?");
-		if (pathSegments.length !== 2) return path$6;
+	function safeUrl(path$7) {
+		if (typeof path$7 !== "string") return path$7;
+		const pathSegments = path$7.split("?");
+		if (pathSegments.length !== 2) return path$7;
 		const qp = new URLSearchParams(pathSegments.pop());
 		qp.sort();
 		return [...pathSegments, qp.toString()].join("?");
 	}
-	function matchKey(mockDispatch$1, { path: path$6, method, body, headers }) {
-		const pathMatch = matchValue$1(mockDispatch$1.path, path$6);
+	function matchKey(mockDispatch$1, { path: path$7, method, body, headers }) {
+		const pathMatch = matchValue$1(mockDispatch$1.path, path$7);
 		const methodMatch = matchValue$1(mockDispatch$1.method, method);
 		const bodyMatch = typeof mockDispatch$1.body !== "undefined" ? matchValue$1(mockDispatch$1.body, body) : true;
 		const headersMatch = matchHeaders(mockDispatch$1, headers);
@@ -8794,7 +8796,7 @@ var require_mock_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici
 	function getMockDispatch(mockDispatches, key) {
 		const basePath = key.query ? buildURL$1(key.path, key.query) : key.path;
 		const resolvedPath = typeof basePath === "string" ? safeUrl(basePath) : basePath;
-		let matchedMockDispatches = mockDispatches.filter(({ consumed }) => !consumed).filter(({ path: path$6 }) => matchValue$1(safeUrl(path$6), resolvedPath));
+		let matchedMockDispatches = mockDispatches.filter(({ consumed }) => !consumed).filter(({ path: path$7 }) => matchValue$1(safeUrl(path$7), resolvedPath));
 		if (matchedMockDispatches.length === 0) throw new MockNotMatchedError(`Mock dispatch not matched for path '${resolvedPath}'`);
 		matchedMockDispatches = matchedMockDispatches.filter(({ method }) => matchValue$1(method, key.method));
 		if (matchedMockDispatches.length === 0) throw new MockNotMatchedError(`Mock dispatch not matched for method '${key.method}'`);
@@ -8832,9 +8834,9 @@ var require_mock_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici
 		if (index !== -1) mockDispatches.splice(index, 1);
 	}
 	function buildKey$1(opts) {
-		const { path: path$6, method, body, headers, query } = opts;
+		const { path: path$7, method, body, headers, query } = opts;
 		return {
-			path: path$6,
+			path: path$7,
 			method,
 			body,
 			headers,
@@ -9233,10 +9235,10 @@ var require_pending_interceptors_formatter = /* @__PURE__ */ __commonJS({ "node_
 			});
 		}
 		format(pendingInterceptors) {
-			const withPrettyHeaders = pendingInterceptors.map(({ method, path: path$6, data: { statusCode }, persist, times, timesInvoked, origin }) => ({
+			const withPrettyHeaders = pendingInterceptors.map(({ method, path: path$7, data: { statusCode }, persist, times, timesInvoked, origin }) => ({
 				Method: method,
 				Origin: origin,
-				Path: path$6,
+				Path: path$7,
 				"Status code": statusCode,
 				Persistent: persist ? "✅" : "❌",
 				Invocations: timesInvoked,
@@ -12861,8 +12863,8 @@ var require_util$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici@5.2
 	* path-value        = <any CHAR except CTLs or ";">
 	* @param {string} path
 	*/
-	function validateCookiePath(path$6) {
-		for (const char of path$6) if (char.charCodeAt(0) < 33 || char === ";") throw new Error("Invalid cookie path");
+	function validateCookiePath(path$7) {
+		for (const char of path$7) if (char.charCodeAt(0) < 33 || char === ";") throw new Error("Invalid cookie path");
 	}
 	/**
 	* I have no idea why these values aren't allowed to be honest,
@@ -14413,9 +14415,9 @@ var require_undici = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/undici@5.2
 			if (opts != null && typeof opts !== "object") throw new InvalidArgumentError("invalid opts");
 			if (opts && opts.path != null) {
 				if (typeof opts.path !== "string") throw new InvalidArgumentError("invalid opts.path");
-				let path$6 = opts.path;
-				if (!opts.path.startsWith("/")) path$6 = `/${path$6}`;
-				url = new URL(util$1.parseOrigin(url).origin + path$6);
+				let path$7 = opts.path;
+				if (!opts.path.startsWith("/")) path$7 = `/${path$7}`;
+				url = new URL(util$1.parseOrigin(url).origin + path$7);
 			} else {
 				if (!opts) opts = typeof url === "object" ? url : {};
 				url = util$1.parseURL(url);
@@ -15520,7 +15522,7 @@ var require_path_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 		return result;
 	};
 	Object.defineProperty(exports, "__esModule", { value: true });
-	const path$5 = __importStar$9(require("path"));
+	const path$6 = __importStar$9(require("path"));
 	/**
 	* toPosixPath converts the given path to the posix form. On Windows, \\ will be
 	* replaced with /.
@@ -15552,7 +15554,7 @@ var require_path_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 	* @return string The platform-specific path.
 	*/
 	function toPlatformPath(pth) {
-		return pth.replace(/[/\\]/g, path$5.sep);
+		return pth.replace(/[/\\]/g, path$6.sep);
 	}
 	exports.toPlatformPath = toPlatformPath;
 }) });
@@ -15620,7 +15622,7 @@ var require_io_util = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actions+
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
 	const fs$2 = __importStar$8(require("fs"));
-	const path$4 = __importStar$8(require("path"));
+	const path$5 = __importStar$8(require("path"));
 	_a = fs$2.promises, exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
 	exports.IS_WINDOWS = process.platform === "win32";
 	exports.UV_FS_O_EXLOCK = 268435456;
@@ -15670,7 +15672,7 @@ var require_io_util = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actions+
 			}
 			if (stats && stats.isFile()) {
 				if (exports.IS_WINDOWS) {
-					const upperExt = path$4.extname(filePath).toUpperCase();
+					const upperExt = path$5.extname(filePath).toUpperCase();
 					if (extensions.some((validExt) => validExt.toUpperCase() === upperExt)) return filePath;
 				} else if (isUnixExecutable(stats)) return filePath;
 			}
@@ -15686,10 +15688,10 @@ var require_io_util = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actions+
 				if (stats && stats.isFile()) {
 					if (exports.IS_WINDOWS) {
 						try {
-							const directory = path$4.dirname(filePath);
-							const upperName = path$4.basename(filePath).toUpperCase();
+							const directory = path$5.dirname(filePath);
+							const upperName = path$5.basename(filePath).toUpperCase();
 							for (const actualName of yield exports.readdir(directory)) if (upperName === actualName.toUpperCase()) {
-								filePath = path$4.join(directory, actualName);
+								filePath = path$5.join(directory, actualName);
 								break;
 							}
 						} catch (err) {
@@ -15782,7 +15784,7 @@ var require_io = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actions+io@1.
 	};
 	Object.defineProperty(exports, "__esModule", { value: true });
 	const assert_1$1 = require("assert");
-	const path$3 = __importStar$7(require("path"));
+	const path$4 = __importStar$7(require("path"));
 	const ioUtil$1 = __importStar$7(require_io_util());
 	/**
 	* Copies a file or folder.
@@ -15797,12 +15799,12 @@ var require_io = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actions+io@1.
 			const { force, recursive, copySourceDirectory } = readCopyOptions(options);
 			const destStat = (yield ioUtil$1.exists(dest)) ? yield ioUtil$1.stat(dest) : null;
 			if (destStat && destStat.isFile() && !force) return;
-			const newDest = destStat && destStat.isDirectory() && copySourceDirectory ? path$3.join(dest, path$3.basename(source)) : dest;
+			const newDest = destStat && destStat.isDirectory() && copySourceDirectory ? path$4.join(dest, path$4.basename(source)) : dest;
 			if (!(yield ioUtil$1.exists(source))) throw new Error(`no such file or directory: ${source}`);
 			if ((yield ioUtil$1.stat(source)).isDirectory()) if (!recursive) throw new Error(`Failed to copy. ${source} is a directory, but tried to copy without recursive flag.`);
 			else yield cpDirRecursive(source, newDest, 0, force);
 			else {
-				if (path$3.relative(source, newDest) === "") throw new Error(`'${newDest}' and '${source}' are the same file`);
+				if (path$4.relative(source, newDest) === "") throw new Error(`'${newDest}' and '${source}' are the same file`);
 				yield copyFile(source, newDest, force);
 			}
 		});
@@ -15820,13 +15822,13 @@ var require_io = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actions+io@1.
 			if (yield ioUtil$1.exists(dest)) {
 				let destExists = true;
 				if (yield ioUtil$1.isDirectory(dest)) {
-					dest = path$3.join(dest, path$3.basename(source));
+					dest = path$4.join(dest, path$4.basename(source));
 					destExists = yield ioUtil$1.exists(dest);
 				}
 				if (destExists) if (options.force == null || options.force) yield rmRF(dest);
 				else throw new Error("Destination already exists");
 			}
-			yield mkdirP(path$3.dirname(dest));
+			yield mkdirP(path$4.dirname(dest));
 			yield ioUtil$1.rename(source, dest);
 		});
 	}
@@ -15901,21 +15903,21 @@ var require_io = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actions+io@1.
 			if (!tool) throw new Error("parameter 'tool' is required");
 			const extensions = [];
 			if (ioUtil$1.IS_WINDOWS && process.env["PATHEXT"]) {
-				for (const extension of process.env["PATHEXT"].split(path$3.delimiter)) if (extension) extensions.push(extension);
+				for (const extension of process.env["PATHEXT"].split(path$4.delimiter)) if (extension) extensions.push(extension);
 			}
 			if (ioUtil$1.isRooted(tool)) {
 				const filePath = yield ioUtil$1.tryGetExecutablePath(tool, extensions);
 				if (filePath) return [filePath];
 				return [];
 			}
-			if (tool.includes(path$3.sep)) return [];
+			if (tool.includes(path$4.sep)) return [];
 			const directories = [];
 			if (process.env.PATH) {
-				for (const p of process.env.PATH.split(path$3.delimiter)) if (p) directories.push(p);
+				for (const p of process.env.PATH.split(path$4.delimiter)) if (p) directories.push(p);
 			}
 			const matches = [];
 			for (const directory of directories) {
-				const filePath = yield ioUtil$1.tryGetExecutablePath(path$3.join(directory, tool), extensions);
+				const filePath = yield ioUtil$1.tryGetExecutablePath(path$4.join(directory, tool), extensions);
 				if (filePath) matches.push(filePath);
 			}
 			return matches;
@@ -16029,7 +16031,7 @@ var require_toolrunner = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 	const os$3 = __importStar$6(require("os"));
 	const events = __importStar$6(require("events"));
 	const child = __importStar$6(require("child_process"));
-	const path$2 = __importStar$6(require("path"));
+	const path$3 = __importStar$6(require("path"));
 	const io$1 = __importStar$6(require_io());
 	const ioUtil = __importStar$6(require_io_util());
 	const timers_1 = require("timers");
@@ -16206,7 +16208,7 @@ var require_toolrunner = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 		*/
 		exec() {
 			return __awaiter$6(this, void 0, void 0, function* () {
-				if (!ioUtil.isRooted(this.toolPath) && (this.toolPath.includes("/") || IS_WINDOWS$1 && this.toolPath.includes("\\"))) this.toolPath = path$2.resolve(process.cwd(), this.options.cwd || process.cwd(), this.toolPath);
+				if (!ioUtil.isRooted(this.toolPath) && (this.toolPath.includes("/") || IS_WINDOWS$1 && this.toolPath.includes("\\"))) this.toolPath = path$3.resolve(process.cwd(), this.options.cwd || process.cwd(), this.toolPath);
 				this.toolPath = yield io$1.which(this.toolPath, true);
 				return new Promise((resolve, reject) => __awaiter$6(this, void 0, void 0, function* () {
 					this._debug(`exec tool: ${this.toolPath}`);
@@ -16675,7 +16677,7 @@ var require_core = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actions+cor
 	const file_command_1 = require_file_command();
 	const utils_1 = require_utils$1();
 	const os$2 = __importStar$3(require("os"));
-	const path$1 = __importStar$3(require("path"));
+	const path$2 = __importStar$3(require("path"));
 	const oidc_utils_1 = require_oidc_utils();
 	/**
 	* The code to exit an action
@@ -16718,7 +16720,7 @@ var require_core = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actions+cor
 	function addPath(inputPath) {
 		if (process.env["GITHUB_PATH"] || "") (0, file_command_1.issueFileCommand)("PATH", inputPath);
 		else (0, command_1.issueCommand)("add-path", {}, inputPath);
-		process.env["PATH"] = `${inputPath}${path$1.delimiter}${process.env["PATH"]}`;
+		process.env["PATH"] = `${inputPath}${path$2.delimiter}${process.env["PATH"]}`;
 	}
 	exports.addPath = addPath;
 	/**
@@ -18173,7 +18175,7 @@ var require_tool_cache = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 	const fs = __importStar(require("fs"));
 	const mm = __importStar(require_manifest());
 	const os = __importStar(require("os"));
-	const path = __importStar(require("path"));
+	const path$1 = __importStar(require("path"));
 	const httpm = __importStar(require_lib());
 	const semver = __importStar(require_semver());
 	const stream = __importStar(require("stream"));
@@ -18201,7 +18203,7 @@ var require_tool_cache = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 			core.debug(`source file: ${sourceFile}`);
 			if (!fs.statSync(sourceFile).isFile()) throw new Error("sourceFile is not a file");
 			const destFolder = yield _createToolPath(tool, version, arch$1);
-			const destPath = path.join(destFolder, targetFile);
+			const destPath = path$1.join(destFolder, targetFile);
 			core.debug(`destination file ${destPath}`);
 			yield io.cp(sourceFile, destPath);
 			_completeToolPath(tool, version, arch$1);
@@ -18227,7 +18229,7 @@ var require_tool_cache = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 		let toolPath = "";
 		if (versionSpec) {
 			versionSpec = semver.clean(versionSpec) || "";
-			const cachePath = path.join(_getCacheDirectory(), toolName, versionSpec, arch$1);
+			const cachePath = path$1.join(_getCacheDirectory(), toolName, versionSpec, arch$1);
 			core.debug(`checking cache: ${cachePath}`);
 			if (fs.existsSync(cachePath) && fs.existsSync(`${cachePath}.complete`)) {
 				core.debug(`Found tool in cache ${toolName} ${versionSpec} ${arch$1}`);
@@ -18246,11 +18248,11 @@ var require_tool_cache = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 	function findAllVersions(toolName, arch$1) {
 		const versions = [];
 		arch$1 = arch$1 || os.arch();
-		const toolPath = path.join(_getCacheDirectory(), toolName);
+		const toolPath = path$1.join(_getCacheDirectory(), toolName);
 		if (fs.existsSync(toolPath)) {
 			const children = fs.readdirSync(toolPath);
 			for (const child$1 of children) if (isExplicitVersion(child$1)) {
-				const fullPath = path.join(toolPath, child$1, arch$1 || "");
+				const fullPath = path$1.join(toolPath, child$1, arch$1 || "");
 				if (fs.existsSync(fullPath) && fs.existsSync(`${fullPath}.complete`)) versions.push(child$1);
 			}
 		}
@@ -18258,7 +18260,7 @@ var require_tool_cache = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 	}
 	function _createToolPath(tool, version, arch$1) {
 		return __awaiter(this, void 0, void 0, function* () {
-			const folderPath = path.join(_getCacheDirectory(), tool, semver.clean(version) || version, arch$1 || "");
+			const folderPath = path$1.join(_getCacheDirectory(), tool, semver.clean(version) || version, arch$1 || "");
 			core.debug(`destination ${folderPath}`);
 			const markerPath = `${folderPath}.complete`;
 			yield io.rmRF(folderPath);
@@ -18268,7 +18270,7 @@ var require_tool_cache = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 		});
 	}
 	function _completeToolPath(tool, version, arch$1) {
-		const markerPath = `${path.join(_getCacheDirectory(), tool, semver.clean(version) || version, arch$1 || "")}.complete`;
+		const markerPath = `${path$1.join(_getCacheDirectory(), tool, semver.clean(version) || version, arch$1 || "")}.complete`;
 		fs.writeFileSync(markerPath, "");
 		core.debug("finished caching tool");
 	}
@@ -18410,20 +18412,20 @@ var StreamProcessor = class {
 				if (subtype === "started") {
 					this.toolCount += 1;
 					if (data.tool_call?.writeToolCall) {
-						const path$6 = data.tool_call.writeToolCall.args?.path || "unknown";
-						import_core$1.info(`\n🔧 Tool #${this.toolCount}: Creating ${path$6}`);
+						const path$7 = data.tool_call.writeToolCall.args?.path || "unknown";
+						import_core$1.info(`\n🔧 Tool #${this.toolCount}: Creating ${path$7}`);
 						this.options.onToolCall?.({
 							type: "started",
 							toolType: "write",
-							path: path$6
+							path: path$7
 						});
 					} else if (data.tool_call?.readToolCall) {
-						const path$6 = data.tool_call.readToolCall.args?.path || "unknown";
-						import_core$1.info(`\n📖 Tool #${this.toolCount}: Reading ${path$6}`);
+						const path$7 = data.tool_call.readToolCall.args?.path || "unknown";
+						import_core$1.info(`\n📖 Tool #${this.toolCount}: Reading ${path$7}`);
 						this.options.onToolCall?.({
 							type: "started",
 							toolType: "read",
-							path: path$6
+							path: path$7
 						});
 					} else if (data.tool_call?.updateTodosToolCall) {
 						const todos = data.tool_call.updateTodosToolCall.args?.todos || [];
@@ -18473,14 +18475,14 @@ var StreamProcessor = class {
 						this.options.onToolCall?.(toolInfo);
 					} else if (data.tool_call?.readToolCall) {
 						const call = data.tool_call.readToolCall;
-						const path$6 = call.args?.path || "unknown path";
+						const path$7 = call.args?.path || "unknown path";
 						const errorMessage = call.result?.error?.errorMessage;
 						import_core$1.info(`\n📖 Tool call completed (read file)`);
-						import_core$1.info(`📝 File path:\n  ${path$6}`);
+						import_core$1.info(`📝 File path:\n  ${path$7}`);
 						const toolInfo = {
 							type: "completed",
 							toolType: "read",
-							path: path$6,
+							path: path$7,
 							result: {
 								success: !errorMessage,
 								totalLines: call.result?.success?.totalLines,
@@ -18582,6 +18584,7 @@ var CursorAgentSetup = class {
 			const installScript = `curl https://cursor.com/install -fsS | bash`;
 			import_core.info("Running Cursor Agent CLI installation script...");
 			await import_exec.exec("bash", ["-c", installScript]);
+			import_core.addPath(node_path.default.join(node_process.default.env.HOME ?? "", ".local/bin"));
 			const agentPath = await import_io.which("cursor-agent");
 			if (!agentPath) throw new Error("Cursor Agent CLI not found in PATH after installation");
 			import_core.info(`Cursor Agent CLI found at: ${agentPath}`);
