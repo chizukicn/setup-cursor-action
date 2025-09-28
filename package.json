@@ -1,0 +1,67 @@
+{
+  "name": "starter-ts",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.17.1",
+  "description": "",
+  "author": "Chizuki <chizukicn@outlook.com>",
+  "license": "MIT",
+  "repository": "chizukicn/starter-ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "vitest dev",
+    "lint": "eslint --cache -f mo",
+    "lint:fix": "pnpm lint --fix",
+    "prepare": "npx simple-git-hooks",
+    "prepack": "pnpm run build",
+    "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
+    "test": "pnpm lint && vitest run --coverage",
+    "up:deps": "taze major",
+    "up:polyfill": "nolyfill install"
+  },
+  "devDependencies": {
+    "@curev/eslint-config": "^0.6.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "changelogen": "^0.6.2",
+    "eslint": "^9.36.0",
+    "eslint-formatter-mo": "^2.3.0",
+    "lint-staged": "^16.2.1",
+    "nolyfill": "^1.0.44",
+    "simple-git-hooks": "^2.13.1",
+    "tsdown": "^0.15.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "array-includes": "npm:@nolyfill/array-includes@^1.0.44",
+      "array.prototype.flat": "npm:@nolyfill/array.prototype.flat@^1.0.44",
+      "array.prototype.flatmap": "npm:@nolyfill/array.prototype.flatmap@^1.0.44",
+      "has": "npm:@nolyfill/has@^1.0.44",
+      "is-core-module": "npm:@nolyfill/is-core-module@^1.0.39",
+      "object.values": "npm:@nolyfill/object.values@^1.0.44"
+    }
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,mjs,cjs}": [
+      "eslint --cache --fix"
+    ]
+  }
+}
