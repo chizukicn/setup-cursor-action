@@ -1,0 +1,32 @@
+name: Setup Cursor Agent CLI
+description: Setup Cursor Agent CLI in GitHub Actions (macOS and Linux only)
+author: Chizuki <chizukicn@outlook.com>
+branding:
+  icon: terminal
+  color: blue
+
+inputs:
+  version:
+    description: "Cursor Agent CLI version to install (e.g., latest)"
+    required: false
+    default: latest
+  prompt:
+    description: Prompt to send to Cursor Agent CLI (defaults to CURSOR_PROMPT environment variable)
+    required: false
+  api-key:
+    description: Cursor API key for authentication (defaults to CURSOR_API_KEY environment variable)
+    required: false
+  model:
+    description: "Model to use for Cursor Agent CLI (defaults to 'auto')"
+    required: false
+    default: auto
+
+outputs:
+  cursor-agent-path:
+    description: Path to the installed Cursor Agent CLI executable
+  cursor-agent-version:
+    description: Version of the installed Cursor Agent CLI
+
+runs:
+  using: node20
+  main: dist/index.js
