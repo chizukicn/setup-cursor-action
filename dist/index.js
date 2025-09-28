@@ -16031,7 +16031,7 @@ var require_toolrunner = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 	const child = __importStar$6(require("child_process"));
 	const path$2 = __importStar$6(require("path"));
 	const io$1 = __importStar$6(require_io());
-	const ioUtil = __importStar$6(require("@actions/io/lib/io-util"));
+	const ioUtil = __importStar$6(require_io_util());
 	const timers_1 = require("timers");
 	const IS_WINDOWS$1 = process.platform === "win32";
 	var ToolRunner = class extends events.EventEmitter {
@@ -18179,7 +18179,7 @@ var require_tool_cache = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@actio
 	const stream = __importStar(require("stream"));
 	const util = __importStar(require("util"));
 	const assert_1 = require("assert");
-	const exec_1 = require("@actions/exec/lib/exec");
+	const exec_1 = require_exec();
 	const retry_helper_1 = require_retry_helper();
 	const IS_WINDOWS = process.platform === "win32";
 	const IS_MAC = process.platform === "darwin";
