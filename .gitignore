@@ -1,6 +1,5 @@
 node_modules
 coverage
-dist
 types
 .vscode
 .DS_Store
