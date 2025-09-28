@@ -18634,7 +18634,7 @@ var CursorAgentSetup = class {
 			import_core.info("Starting Cursor Agent CLI setup...");
 			await this.installCursorAgent();
 			import_core.info("Cursor Agent CLI setup completed successfully!");
-			if (this.options.prompt) await this.runCursorAgent();
+			await this.runCursorAgent();
 		} catch (error$1) {
 			import_core.setFailed(`Cursor Agent CLI setup failed: ${error$1}`);
 			throw error$1;

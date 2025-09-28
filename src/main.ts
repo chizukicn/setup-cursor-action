@@ -150,10 +150,7 @@ export class CursorAgentSetup {
 
       core.info("Cursor Agent CLI setup completed successfully!");
 
-      // 如果有prompt，运行cursor-agent
-      if (this.options.prompt) {
-        await this.runCursorAgent();
-      }
+      await this.runCursorAgent();
     } catch (error) {
       core.setFailed(`Cursor Agent CLI setup failed: ${error}`);
       throw error;
