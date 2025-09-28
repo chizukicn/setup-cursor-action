@@ -18539,7 +18539,7 @@ var StreamProcessor = class {
 };
 
 //#endregion
-//#region src/index.ts
+//#region src/main.ts
 var import_core = /* @__PURE__ */ __toESM(require_core());
 var CursorAgentSetup = class {
 	options;
@@ -18652,5 +18652,7 @@ async function main() {
 }
 
 //#endregion
-exports.CursorAgentSetup = CursorAgentSetup;
-exports.main = main;
+//#region src/index.ts
+main();
+
+//#endregion
