@@ -50,13 +50,11 @@ export class CursorAgentSetup {
       if (toolPath) {
         core.info(`Found cached Cursor Agent CLI at: ${toolPath}`);
         core.addPath(toolPath);
-        core.setOutput("cursor-agent-path", toolPath);
 
         // Get version
         try {
           const { stdout } = await exec.getExecOutput("cursor-agent", ["--version"]);
           core.info(`Cursor Agent CLI version: ${stdout.trim()}`);
-          core.setOutput("cursor-agent-version", stdout.trim());
         } catch {
           core.warning("Could not get Cursor Agent CLI version");
         }

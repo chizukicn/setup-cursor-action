@@ -21,12 +21,6 @@ inputs:
     required: false
     default: auto
 
-outputs:
-  cursor-agent-path:
-    description: Path to the installed Cursor Agent CLI executable
-  cursor-agent-version:
-    description: Version of the installed Cursor Agent CLI
-
 runs:
   using: node20
   main: dist/index.js
