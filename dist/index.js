@@ -18570,11 +18570,9 @@ var CursorAgentSetup = class {
 			if (toolPath) {
 				import_core.info(`Found cached Cursor Agent CLI at: ${toolPath}`);
 				import_core.addPath(toolPath);
-				import_core.setOutput("cursor-agent-path", toolPath);
 				try {
 					const { stdout } = await import_exec.getExecOutput("cursor-agent", ["--version"]);
 					import_core.info(`Cursor Agent CLI version: ${stdout.trim()}`);
-					import_core.setOutput("cursor-agent-version", stdout.trim());
 				} catch {
 					import_core.warning("Could not get Cursor Agent CLI version");
 				}
