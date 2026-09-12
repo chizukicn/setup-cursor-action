@@ -1,7 +1,7 @@
 {
   "name": "setup-cursor-action",
   "version": "0.0.1.beta.0",
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@12.4.0",
   "description": "GitHub Action for setting up Cursor Agent CLI",
   "author": "Chizuki <chizukicn@outlook.com>",
   "license": "MIT",
